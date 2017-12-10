@@ -34,6 +34,7 @@ import com.marklogic.gradle.task.qconsole.ImportWorkspacesTask
 import com.marklogic.gradle.task.roxy.RoxyMigrateBuildStepsTask
 import com.marklogic.gradle.task.roxy.RoxyMigrateFilesTask
 import com.marklogic.gradle.task.roxy.RoxyMigratePropertiesTask
+import com.marklogic.gradle.task.roxy.RoxyTestTask
 import com.marklogic.gradle.task.scaffold.GenerateScaffoldTask
 import com.marklogic.gradle.task.schemas.LoadSchemasTask
 import com.marklogic.gradle.task.security.*
@@ -241,8 +242,9 @@ class MarkLogicPlugin implements Plugin<Project> {
 			"Use -ProxyProjectPath to define the location of your Roxy project.")
 		project.task("mlRoxyMigrateProject", group: roxyGroup, description: "Run all tasks for migrating a Roxy project into this Gradle project. " +
 			"Use -ProxyProjectPath to define the location of your Roxy project.", dependsOn: ["mlRoxyMigrateBuildSteps", "mlRoxyMigrateFiles", "mlRoxyMigrateProperties"])
-		project.task("mlRoxyTest", group: roxyGroup, description: "Run Roxy tests found under /test/suites in the modules database. " +
-			"Connects to MarkLogic via the REST API server defined by mlTestRestPort, and uses mlRest* properties for authentication.")
+		project.task("mlRoxyTest", type: RoxyTestTask, group: roxyGroup, description: "Run Roxy tests found under /test/suites in the modules database. " +
+			"Connects to MarkLogic via the REST API server defined by mlTestRestPort, and uses mlRest* properties for authentication. " +
+			"Use -ProxyTestResultPath to override where test result files are written, which defaults to build/test-results/roxy-test.")
 
 		logger.info("Finished initializing ml-gradle\n")
 	}
