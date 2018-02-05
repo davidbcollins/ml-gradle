@@ -208,6 +208,11 @@ class MarkLogicPlugin implements Plugin<Project> {
 		project.task("mlUndeployRoles", type: UndeployRolesTask, group: securityGroup, description: "Undeploy (delete) each role in the configuration directory")
 		project.task("mlUndeployUsers", type: UndeployUsersTask, group: securityGroup, description: "Undeploy (delete) each user in the configuration directory")
 		project.task("mlUndeploySecurity", type: UndeploySecurityTask, group: securityGroup, description: "Undeploy (delete) all security resources in the configuration directory")
+		project.task( "mlExportWallet", type: ExportWalletTask, group: securityGroup, description: "Export encryption keys from MarkLogic's internal Key Management System (KMS)")
+		project.task( "mlImportWallet", type: ImportWalletTask, group: securityGroup, description: "Import encryption keys to MarkLogic's internal Key Management System (KMS)")
+		project.task( "mlRotateLogsEncryptionKey", type: RotateLogsEncryptionKeyTask, group: securityGroup, description: "Rotate the key encryption key (KEK) used for logs as part of MarkLogic's internal Key Management System (KMS)")
+		project.task( "mlRotateConfigEncryptionKey", type: RotateConfigEncryptionKeyTask, group: securityGroup, description: "Rotate the key encryption key (KEK) used for configuration as part of MarkLogic's internal Key Management System (KMS)")
+		project.task( "mlRotateDataEncryptionKey", type: RotateDataEncryptionKeyTask, group: securityGroup, description: "Rotate the key encryption key (KEK) used for data as part of MarkLogic's internal Key Management System (KMS)")
 
 		String sqlGroup = "ml-gradle SQL"
 		project.task("mlDeployViewSchemas", type: DeployViewSchemasTask, group: sqlGroup, description: "Deploy each SQL view schema, updating it if it exists, in the configuration directory")
